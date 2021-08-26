@@ -18,6 +18,8 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
+import com.sapiensacademytest.repository.CartRepository;
+
 public class CasosCarrito {
 	WebDriver customDriver = new ChromeDriver();
 	List<WebElement> listaDeProductos = new ArrayList<WebElement>();
@@ -28,6 +30,7 @@ public class CasosCarrito {
 	String mensajeDeVentana = new String();
 	String mensajeCarrito = new String();
 	WebDriverWait espera = new WebDriverWait(customDriver, 20);
+	CartRepository repositorio = new CartRepository(customDriver);
 
 	
 	@BeforeSuite
@@ -45,7 +48,7 @@ public class CasosCarrito {
 	@Test
 	public void elegirArticulosAzarCarritoDeCompras() throws InterruptedException {
 		Assert.assertEquals(customDriver.getTitle(), "My Store");
-		WebElement contenedorProductos = customDriver.findElement(By.id("homefeatured"));
+		WebElement contenedorProductos = repositorio.homefeatureElement();
 		listaDeProductos = contenedorProductos.findElements(By.tagName("li"));
 		System.out.println("Este es el tamaño de la lista: " + listaDeProductos.size());
 		
