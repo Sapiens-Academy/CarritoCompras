@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SuiteCarrito">
+  <test name="Casos de Prueba de Compra">
+    <classes>
+      <class name="com.sapiensacademytest.testcompras.CasosCarrito"/>
+    </classes>
+  </test> <!-- Casos de Prueba de Compra -->
+</suite> <!-- SuiteCarrito -->
