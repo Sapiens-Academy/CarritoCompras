@@ -1,8 +1,12 @@
 package com.sapiensacademytest.repository;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class CartRepository {
 	
@@ -14,11 +18,24 @@ public class CartRepository {
 	WebDriver driver;
 	
 	By homeFeatured = By.id("homefeatured");
-	By ListaElementos = By.tagName("li");
+	By listaElementos = By.tagName("li");
 	By addToCartButton = By.linkText("Add to cart");
+	By ventanaPopUp = By.xpath("//*[@id=\"layer_cart\"]/div[1]/div[1]/h2");
+	
 	
 	public WebElement homefeatureElement() {
 		return driver.findElement(homeFeatured);
 	}
-
+	
+	public List<WebElement> listarElementos(WebElement contenedorProductos) {
+		return contenedorProductos.findElements(listaElementos);
+	}
+	
+	public WebElement addToCart(WebElement productoLista) {
+		return productoLista.findElement(addToCartButton);
+	}
+	
+	public By elementoVentanaPopUp() {
+		return ventanaPopUp;
+	}
 }

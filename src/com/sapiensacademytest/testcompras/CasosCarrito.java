@@ -49,7 +49,7 @@ public class CasosCarrito {
 	public void elegirArticulosAzarCarritoDeCompras() throws InterruptedException {
 		Assert.assertEquals(customDriver.getTitle(), "My Store");
 		WebElement contenedorProductos = repositorio.homefeatureElement();
-		listaDeProductos = contenedorProductos.findElements(By.tagName("li"));
+		listaDeProductos = repositorio.listarElementos(contenedorProductos);
 		System.out.println("Este es el tamaño de la lista: " + listaDeProductos.size());
 		
 		if (listaDeProductos.size()<4) {
@@ -80,7 +80,7 @@ public class CasosCarrito {
 			System.out.println("Este es el valor unitario del producto: " + precio);
 			totalProductos += precio;
 			System.out.println("Este es el total de los valores: " + totalProductos);
-			listaDeProductos.get(productosAlAzar.get(i)-1).findElement(By.linkText("Add to cart")).click();
+			repositorio.addToCart(listaDeProductos.get(productosAlAzar.get(i)-1)).click();
 			if (i==0) {
 				mensajeDeVentana = "There is 1 item in your cart.";
 				mensajeCarrito = "Cart 1 Product";
@@ -88,8 +88,8 @@ public class CasosCarrito {
 				mensajeDeVentana = String.format("There are %s items in your cart.", i+1);
 				mensajeCarrito = String.format("Cart %s Products", i+1);				
 			}
-			WebElement ventanaDeProducto = espera.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"layer_cart\"]/div[1]/div[1]/h2")));
-			Assert.assertEquals(customDriver.findElement(By.xpath("//*[@id=\"layer_cart\"]/div[1]/div[1]/h2")).getText(), "Product successfully added to your shopping cart");
+			WebElement ventanaDeProducto = espera.until(ExpectedConditions.visibilityOfElementLocated(repositorio.elementoVentanaPopUp()));
+			Assert.assertEquals(customDriver.findElement(repositorio.elementoVentanaPopUp()).getText(), "Product successfully added to your shopping cart");
 			
 			Assert.assertEquals(customDriver.findElement(By.xpath("//*[@id=\"layer_cart\"]/div[1]/div[2]/h2")).getText() , mensajeDeVentana);
 			Assert.assertEquals(customDriver.findElement(By.xpath("//*[@id=\"header\"]/div[3]/div/div/div[3]/div/a")).getText() , mensajeCarrito);
