@@ -13,18 +13,22 @@ public class CartRepository {
 	public CartRepository(WebDriver navegador) 
 	{
 		this.driver = navegador;
+		PageFactory.initElements(driver, this);
 	}
 	
 	WebDriver driver;
 	
-	By homeFeatured = By.id("homefeatured");
+	@FindBy(id="homefeatured")
+	WebElement homeFeatured;
+	
+	//By homeFeatured = By.id("homefeatured");
 	By listaElementos = By.tagName("li");
 	By addToCartButton = By.linkText("Add to cart");
 	By ventanaPopUp = By.xpath("//*[@id=\"layer_cart\"]/div[1]/div[1]/h2");
 	
 	
 	public WebElement homefeatureElement() {
-		return driver.findElement(homeFeatured);
+		return homeFeatured;
 	}
 	
 	public List<WebElement> listarElementos(WebElement contenedorProductos) {
