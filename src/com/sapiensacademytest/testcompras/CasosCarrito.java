@@ -88,13 +88,15 @@ public class CasosCarrito {
 				mensajeDeVentana = String.format("There are %s items in your cart.", i+1);
 				mensajeCarrito = String.format("Cart %s Products", i+1);				
 			}
-			WebElement ventanaDeProducto = espera.until(ExpectedConditions.visibilityOfElementLocated(repositorio.elementoVentanaPopUp()));
-			Assert.assertEquals(customDriver.findElement(repositorio.elementoVentanaPopUp()).getText(), "Product successfully added to your shopping cart");
+			WebElement ventanaDeProducto = espera.until(ExpectedConditions.visibilityOf(repositorio.elementoVentanaPopUp()));
+			Assert.assertEquals(repositorio.elementoVentanaPopUp().getText(), "Product successfully added to your shopping cart");
 			
-			Assert.assertEquals(customDriver.findElement(By.xpath("//*[@id=\"layer_cart\"]/div[1]/div[2]/h2")).getText() , mensajeDeVentana);
-			Assert.assertEquals(customDriver.findElement(By.xpath("//*[@id=\"header\"]/div[3]/div/div/div[3]/div/a")).getText() , mensajeCarrito);
+			Assert.assertEquals(customDriver.findElement(By.xpath("//*[@id=\"layer_cart\"]/div[1]/div[2]/h2")).getText() , 
+					mensajeDeVentana);
+			Assert.assertEquals(customDriver.findElement(By.xpath("//*[@id=\"header\"]/div[3]/div/div/div[3]/div/a")).getText() , 
+					mensajeCarrito);
 			customDriver.findElement(By.xpath("//*[@id=\"layer_cart\"]/div[1]/div[2]/div[4]/span")).click();
-			Boolean ventanaDesaparecida = espera.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id=\"layer_cart\"]/div[1]/div[1]/h2")));
+			Boolean ventanaDesaparecida = espera.until(ExpectedConditions.invisibilityOf(repositorio.elementoVentanaPopUp()));
 		}	
 	}
 	
